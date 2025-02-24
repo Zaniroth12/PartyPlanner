@@ -2,8 +2,8 @@
  * @typedef Event
  * @property {number} id
  * @property {string} name
- * @property {string} date
  * @property {string} description
+ * @property {string} date
  * @property {string} location
  */
 
@@ -25,7 +25,7 @@ async function getEvents() {
     events = result.data;
     render();
   } catch(e) {
-    console.error(e);
+    console.error("Error");
   }
 }
 
@@ -37,7 +37,7 @@ async function getEvent(id) {
     selectedEvent = result.data;
     render();
   } catch (e) {
-    console.error(e);
+    console.error("Error");
   }
 }
 
@@ -48,7 +48,7 @@ function EventListItem(event) {
   const $li = document.createElement("li");
   $li.innerHTML = `
     <a href="#selected">${event.name}</a>
-    <a>${getEvent.name} #${event.id}</a>
+    <a>${event.name} #${event.id}</a>
     `;
     $li.addEventListener("click", () => getEvent(event.id));
     return $li;
@@ -77,9 +77,6 @@ function EventDetails() {
   $event.classList.add("event");
   $event.innerHTML = `
     <h3>${selectedEvent.name} #${selectedEvent.id}</h3>
-    <figure>
-      <img alt=${selectedEvent.name} src=${selectedEvent.imageUrl} />
-    </figure>
     <p> ${selectedEvent.description}</p>
   `;
   return $event;
@@ -101,8 +98,8 @@ function render() {
       </section>
     </main>
   `;
-  $app.querySelector("eventList").replaceWith(eventList());
-  $app.querySelector("eventDetails").replaceWith(eventDetails());
+  $app.querySelector("#selected").replaceWith(EventDetails());
+  $app.querySelector("section:first-of-type").appendChild(EventList());
 }
 
 async function init() {
