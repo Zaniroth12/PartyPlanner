@@ -8,8 +8,8 @@
  */
 
 // === Constants ===
-const BASE = "https://fsa-crud-2aa9294fe819.herokuapp.com/api/";
-const COHORT = "/2412-FTB-ET-WEB-AM"; // Make sure to change this!
+const BASE = "https://fsa-crud-2aa9294fe819.herokuapp.com/api";
+const COHORT = "/2412-ftb-er-web-am";
 const RESOURCE = "/events";
 const API = BASE + COHORT + RESOURCE;
 
@@ -47,8 +47,7 @@ async function getEvent(id) {
 function EventListItem(event) {
   const $li = document.createElement("li");
   $li.innerHTML = `
-    <a href="#selected">${event.name}</a>
-    <a>${event.name} #${event.id}</a>
+    <a>${event.name}</a>
     `;
     $li.addEventListener("click", () => getEvent(event.id));
     return $li;
@@ -77,6 +76,8 @@ function EventDetails() {
   $event.classList.add("event");
   $event.innerHTML = `
     <h3>${selectedEvent.name} #${selectedEvent.id}</h3>
+    <p> ${selectedEvent.date}</p>
+    <p> ${selectedEvent.location}</p>
     <p> ${selectedEvent.description}</p>
   `;
   return $event;
